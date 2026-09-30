@@ -1,0 +1,306 @@
+@import "tailwindcss";
+
+/* ═══════════════  BELLAGIO BY SADAF — design tokens  ═══════════════ */
+@theme {
+  --color-blush: #e8cfc8;
+  --color-cream: #f7f0e9;
+  --color-cream-deep: #f0e5da;
+  --color-champagne: #c4a173;
+  --color-mocha: #5a4036;
+  --color-mocha-deep: #43302a;
+  --color-espresso: #241a17;
+  --color-nude: #d9bdb2;
+
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-curtain: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@theme inline {
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-jost), "Jost", system-ui, sans-serif;
+}
+
+:root {
+  --gutter: clamp(1.25rem, 4.5vw, 4rem);
+  color-scheme: light;
+}
+
+html {
+  background: var(--color-cream);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-espresso);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-blush);
+  color: var(--color-espresso);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ─── Type ─── */
+.display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.display em {
+  font-style: italic;
+  font-weight: 300;
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+.h-xl {
+  font-size: clamp(3.4rem, 9vw, 8.5rem);
+}
+.h-lg {
+  font-size: clamp(3.25rem, 6.4vw, 6.25rem);
+}
+.h-md {
+  font-size: clamp(2.4rem, 4vw, 3.75rem);
+}
+
+.px-gutter {
+  padding-inline: var(--gutter);
+}
+
+/* ─── Buttons ─── */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  height: 3.25rem;
+  padding-inline: 1.9rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 400;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.6s var(--ease-silk), border-color 0.6s var(--ease-silk);
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: translateY(101%);
+  transition: transform 0.7s var(--ease-silk);
+}
+.btn:hover::before,
+.btn:focus-visible::before {
+  transform: translateY(0);
+}
+.btn svg {
+  transition: transform 0.6s var(--ease-silk);
+}
+.btn:hover svg {
+  transform: translateX(4px);
+}
+.btn-solid {
+  background: var(--color-cream);
+  color: var(--color-espresso);
+}
+.btn-solid::before {
+  background: var(--color-champagne);
+}
+.btn-solid:hover {
+  color: var(--color-espresso);
+}
+.btn-dark {
+  background: var(--color-espresso);
+  color: var(--color-cream);
+}
+.btn-dark::before {
+  background: var(--color-mocha);
+}
+.btn-ghost {
+  border: 1px solid color-mix(in oklab, currentColor 45%, transparent);
+}
+.btn-ghost::before {
+  background: var(--color-cream);
+}
+.btn-ghost:hover {
+  color: var(--color-espresso);
+  border-color: var(--color-cream);
+}
+.btn-ghost-dark {
+  border: 1px solid color-mix(in oklab, var(--color-espresso) 35%, transparent);
+  color: var(--color-espresso);
+}
+.btn-ghost-dark::before {
+  background: var(--color-espresso);
+}
+.btn-ghost-dark:hover {
+  color: var(--color-cream);
+}
+
+/* Underlined text link that draws in from the left */
+.link-line {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.35rem;
+}
+.link-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+  transform-origin: right;
+  transition: transform 0.7s var(--ease-silk), opacity 0.4s;
+}
+.link-line:hover::after {
+  animation: line-redraw 0.9s var(--ease-silk);
+  opacity: 1;
+}
+@keyframes line-redraw {
+  0% { transform: scaleX(1); transform-origin: right; }
+  45% { transform: scaleX(0); transform-origin: right; }
+  46% { transform: scaleX(0); transform-origin: left; }
+  100% { transform: scaleX(1); transform-origin: left; }
+}
+
+/* Image zoom on hover — used on cards, gallery and bridal panels */
+.zoom img,
+.zoom video {
+  transition: transform 1.6s var(--ease-silk);
+}
+.zoom:hover img,
+.zoom:hover video {
+  transform: scale(1.06);
+}
+
+/* Soft grain to unify mixed stock into one campaign */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Warm grade: pulls cooler stock toward Bellagio's blush/mocha palette */
+.warm {
+  filter: sepia(0.14) saturate(0.92) contrast(1.02);
+}
+
+/* ─── Reveal initial states (only when JS runs and motion is allowed) ─── */
+html.js:not(.reduced) [data-reveal="lines"] .line > span {
+  display: block;
+  transform: translateY(110%);
+}
+html.js:not(.reduced) [data-reveal="clip"] {
+  clip-path: inset(100% 0 0 0);
+}
+html.js:not(.reduced) [data-reveal="fade"] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.line > span {
+  display: block;
+}
+
+/* Hero entrance initial states */
+html.js:not(.reduced) [data-hero="line"] > span {
+  transform: translateY(115%);
+}
+html.js:not(.reduced) [data-hero="fade"],
+html.js:not(.reduced) [data-hero="nav"] {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* Hide the native cursor only when the custom one is live */
+html.has-cursor,
+html.has-cursor a,
+html.has-cursor button {
+  cursor: none;
+}
+
+/* Mobile swipe rails */
+.rail {
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.rail > * {
+  scroll-snap-align: start;
+}
+
+/* Social strip drift */
+@keyframes drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.drift {
+  animation: drift 60s linear infinite;
+}
+.drift:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drift {
+    animation: none;
+  }
+  .zoom img,
+  .zoom video {
+    transition: none;
+  }
+}
+
+/* Intro curtain only exists when JS + motion are available */
+html:not(.js) .intro,
+html.reduced .intro {
+  display: none;
+}
+
+@keyframes scrollcue {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
