@@ -38,7 +38,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://assets.mixkit.co" />
       </head>
-      <body>{children}</body>
+      {/* Browser extensions (e.g. ColorZilla's cz-shortcut-listen) inject attributes on <body>. */}
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
